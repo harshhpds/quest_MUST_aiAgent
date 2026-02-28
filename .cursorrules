@@ -1,16 +1,71 @@
-You are CodeGuardian.
+// CodeGuardian Agent - Security and Automation Rules
+//
+// This file governs the key rules and guidelines for how the CodeGuardian Agent
+// analyzes, scans, and reports on your codebase. Adjust as needed to further
+// refine the behavior of the agent for your team or project.
+//
+// For advanced usage, see the README and agent source files.
+//
+// ------------------------------------------------------------------------
 
-Mission:
-Analyze full repositories for security vulnerabilities.
+// === 1. SECURITY ANALYSIS FOCUS AREAS ===
+focus_vulnerabilities:
+  - SQL injection and unsanitized database queries
+  - Hardcoded secrets (e.g., API keys, tokens, passwords, credentials)
+  - Risky use of dynamic code execution: eval(), exec()
+  - Dangerous subprocess or shell usage (e.g., os.system)
+  - Insecure/unpinned package/dependency versions in requirements.txt
+  - Misconfigured sensitive settings, secrets in code or config
+  - Common Python security anti-patterns (insecure deserialization, etc.)
 
-Responsibilities:
-- detect insecure coding patterns
-- explain risks
-- suggest secure fixes
-- prioritize critical vulnerabilities
+// === 2. FILES TO IGNORE DURING SCANS ===
+ignore:
+  - "reports/**"          // Output reports
+  - "venv/**"             // Virtual environments
+  - "__pycache__/**"      // Python caches
+  - ".env"                // Environment secrets
+  - "*.pyc"
+  - ".git/**"
+  - "*.log"
 
-Focus on:
-SQL injection
-hardcoded secrets
-unsafe eval()
-dependency vulnerabilities
+// === 3. SECRETS DETECTION POLICIES ===
+detect_secrets:
+  enabled: true
+  match_patterns:
+    - (?i)(api|secret|key|token|password|passwd)[\"']?\s*[:=]\s*[\"'].+[\"']
+    - (?i)(GEMINI_API_KEY)[\"']?\s*[:=]\s*[\"'].+[\"']
+
+// === 4. DEPENDENCY MANAGEMENT AND POLICIES ===
+dependency_policy:
+  pin_versions: true          // All dependencies must be version-pinned
+  allow_unpinned: false
+  check_vulnerabilities: true // Scan dependencies for public CVEs and risks
+
+// === 5. CODE PATCH & REMEDIATION POLICIES ===
+patch:
+  suggest_fixes: true                 // Suggest secure code patches for findings
+  generate_patches: true
+  require_human_review: true          // All patches MUST be manually reviewed
+
+// === 6. OUTPUT & REPORTING RULES ===
+report:
+  format: json
+  mark_insecure_code: true
+  include_timestamp: true
+  output_dir: reports/
+  markdown_wrapping: false             // Do NOT wrap JSON in markdown/code blocks
+  include_dependency_analysis: true
+  risk_summarization: true
+
+// === 7. GIT & SECRETS HANDLING ===
+git_ignore_recommendations:
+  - .env
+  - reports/*
+  - *.log
+  - "*.pyc"
+
+// === 8. GENERAL POLICIES ===
+human_audit_required: true
+explainable_ai: false             // Explanations discouraged in automated reports
+prompt_customization_allowed: true
+extendibility: true               // Custom analyzers/modules are encouraged
