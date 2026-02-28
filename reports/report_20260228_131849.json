@@ -1,0 +1,61 @@
+{
+    "scan_target": ".",
+    "scan_timestamp": "2026-02-28T13:18:49.720239",
+    "vulnerabilities": [
+        {
+            "file": ".\\main.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\test.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\agent\\ai_analyzer.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\agent\\dependency_checker.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\agent\\patch_generator.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\agent\\repo_scanner.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\agent\\vulnerability_detector.py",
+            "vulnerabilities": []
+        },
+        {
+            "file": ".\\metrics\\risk_score.py",
+            "vulnerabilities": []
+        }
+    ],
+    "dependency_analysis": [
+        {
+            "dependency": "g\u0000o\u0000o\u0000g\u0000l\u0000e\u0000-\u0000g\u0000e\u0000n\u0000e\u0000r\u0000a\u0000t\u0000i\u0000v\u0000e\u0000a\u0000i\u0000",
+            "risk_level": "MEDIUM",
+            "description": "Dependency version not pinned. May introduce breaking or insecure updates."
+        },
+        {
+            "dependency": "\u0000",
+            "risk_level": "MEDIUM",
+            "description": "Dependency version not pinned. May introduce breaking or insecure updates."
+        },
+        {
+            "dependency": "\u0000p\u0000y\u0000t\u0000h\u0000o\u0000n\u0000-\u0000d\u0000o\u0000t\u0000e\u0000n\u0000v\u0000",
+            "risk_level": "MEDIUM",
+            "description": "Dependency version not pinned. May introduce breaking or insecure updates."
+        }
+    ],
+    "risk_summary": {
+        "score": 0.0,
+        "risk_level": "LOW",
+        "total_vulnerabilities": 0
+    },
+    "patches": []
+}
